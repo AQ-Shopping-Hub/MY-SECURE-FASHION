@@ -58,9 +58,30 @@ elif st.session_state.page == "OTP":
             st.rerun()
         else:
             st.error("Invalid OTP!")
-
-# --- PAGE 4: FINAL SHOPPING PAGE ---
+# --- PAGE 4: FINAL SHOPPING PAGE (Product Showcase) ---
 elif st.session_state.page == "Final":
-    st.title("🛍️ Fashion Collection")
-    st.write("Welcome! Aap successfully verify ho chuki hain.")
-    st.link_button("Order on WhatsApp", "https://wa.me/923706447456") # Apna number likhein
+    st.title("🛍️ My-Secure-Fashion Collection")
+    st.write("Welcome! Aap successfully login aur verify ho chuki hain.")
+    
+    # Product 1
+    col1, col2 = st.columns(2)
+    with col1:
+        st.subheader("Luxury Silk Suit")
+        st.write("Price: Rs. 6,500")
+    with col2:
+        st.image("https://via.placeholder.com/150", caption="Silk Suit") # Yahan aap apni image ka link dal sakti hain
+        st.link_button("Order on WhatsApp", "https://wa.me/923706447456") # Apna number likhein
+
+    st.markdown("---")
+    
+    # Product 2
+    col3, col4 = st.columns(2)
+    with col3:
+        st.subheader("Embroidered Lawn")
+        st.write("Price: Rs. 4,200")
+    with col4:
+        st.link_button("Order on WhatsApp", "https://wa.me/923XXXXXXXXX")
+    
+    if st.button("Logout"):
+        st.session_state.page = "Sign-Up"
+        st.rerun()
