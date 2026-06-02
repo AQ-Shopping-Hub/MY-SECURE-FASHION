@@ -3,11 +3,20 @@ import smtplib
 import random
 from email.message import EmailMessage
 
+# Pink background ke liye CSS
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: #FFC0CB; /* Light Pink Background */
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 st.title("Welcome to My-Secure-Fashion")
 
-# Email aur Password yahan dalen
-EMAIL_ADDRESS = "your_email@gmail.com"  # Apna email likhein
-EMAIL_PASSWORD = "ritaxgheukirpdzr"    # Ye wahi 16-digit code hai jo file 1000249648.jpg mein hai
+# Apna email aur 16-digit App Password yahan likhein
+EMAIL_ADDRESS = "your_email@gmail.com" 
+EMAIL_PASSWORD = "rita xghe ukir pdzr" 
 
 def send_otp_email(user_email, otp):
     msg = EmailMessage()
@@ -20,19 +29,25 @@ def send_otp_email(user_email, otp):
         smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
         smtp.send_message(msg)
 
-email = st.text_input("Enter your email for sign up")
+# Form fields
+name = st.text_input("Enter your name")
+email = st.text_input("Enter your email")
+password = st.text_input("Enter your password", type="password")
 
 if 'otp' not in st.session_state:
     st.session_state.otp = None
 
 if st.button("Send OTP"):
-    st.session_state.otp = random.randint(100000, 999999)
-    send_otp_email(email, st.session_state.otp)
-    st.success("OTP sent to your email!")
+    if name and email and password:
+        st.session_state.otp = random.randint(100000, 999999)
+        send_otp_email(email, st.session_state.otp)
+        st.success("OTP sent to your email!")
+    else:
+        st.error("Please fill all the fields!")
 
 user_otp = st.text_input("Enter OTP received on email")
 if st.button("Verify"):
     if user_otp == str(st.session_state.otp):
-        st.success("Verification successful! You can now access the shop.")
+        st.success(f"Welcome {name}! Verification successful.")
     else:
-        st.error("Invalid OTP. Please try again.")
+        st.error("Invalid OTP.")
