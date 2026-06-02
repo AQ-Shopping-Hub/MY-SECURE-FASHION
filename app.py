@@ -3,18 +3,22 @@ import smtplib
 import random
 from email.message import EmailMessage
 
-# Pink background ke liye CSS
+# CSS: Background Pink aur Input Boxes White
 st.markdown("""
     <style>
     .stApp {
         background-color: #FFC0CB; /* Light Pink Background */
+    }
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: black !important;
     }
     </style>
     """, unsafe_allow_html=True)
 
 st.title("Welcome to My-Secure-Fashion")
 
-# Apna email aur 16-digit App Password yahan likhein
+# Yahan apna email aur wo 16-digit code daalein
 EMAIL_ADDRESS = "your_email@gmail.com" 
 EMAIL_PASSWORD = "rita xghe ukir pdzr" 
 
