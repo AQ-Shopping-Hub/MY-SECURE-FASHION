@@ -15,7 +15,7 @@ st.markdown("""
         font-weight: bold;
     }
     </style>
-    """, unsafe_allow_html=True))
+    """, unsafe_allow_html=True)
 
 # Email details
 EMAIL_ADDRESS = "itscyberme@gmail.com"
