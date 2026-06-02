@@ -3,13 +3,19 @@ import random
 import smtplib
 from email.message import EmailMessage
 
-# --- CSS Styling ---
+# CSS: Background Pink aur Input Box ka Text Light Purple
 st.markdown("""
     <style>
-    .stApp { background-color: #FFC0CB; }
-    .stTextInput > div > div > input { background-color: light purple !important; }
+    .stApp {
+        background-color: #FFC0CB; /* Light Pink Background */
+    }
+    .stTextInput > div > div > input {
+        background-color: white !important;
+        color: #800080 !important; /* Ye Light Purple/Purple color hai */
+        font-weight: bold;
+    }
     </style>
-    """, unsafe_allow_html=True)
+    """, unsafe_allow_html=True))
 
 # Email details
 EMAIL_ADDRESS = "itscyberme@gmail.com"
