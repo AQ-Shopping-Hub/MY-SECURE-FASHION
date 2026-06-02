@@ -7,7 +7,7 @@ from email.message import EmailMessage
 st.markdown("""
     <style>
     .stApp { background-color: #FFC0CB; }
-    .stTextInput > div > div > input { background-color: white !important; }
+    .stTextInput > div > div > input { background-color: light purple !important; }
     </style>
     """, unsafe_allow_html=True)
 
