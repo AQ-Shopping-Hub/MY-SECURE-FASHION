@@ -3,7 +3,7 @@ import smtplib
 import random
 from email.message import EmailMessage
 
-# Pink background aur White input boxes
+# --- CSS Styling ---
 st.markdown("""
     <style>
     .stApp { background-color: #FFC0CB; }
@@ -11,48 +11,46 @@ st.markdown("""
     </style>
     """, unsafe_allow_html=True)
 
-# Session state initialize karein
+# --- Session State ---
 if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
 
-# Agar login nahi hua, to Form dikhayein
+# --- PART 1: LOGIN PAGE ---
 if not st.session_state.logged_in:
     st.title("Welcome to My-Secure-Fashion")
-    EMAIL_ADDRESS = "itscyberme@gmail.com"
-    EMAIL_PASSWORD = "ritaxgheukirpdzr"
-
-    def send_otp_email(user_email, otp):
-        msg = EmailMessage()
-        msg['Subject'] = 'Your Verification Code'
-        msg['From'] = EMAIL_ADDRESS
-        msg['To'] = user_email
-        msg.set_content(f"Aapka verification code hai: {otp}")
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            smtp.send_message(msg)
-
     name = st.text_input("Enter your name")
     email = st.text_input("Enter your email")
     password = st.text_input("Enter your password")
 
-    if 'otp' not in st.session_state:
-        st.session_state.otp = None
+    if 'otp' not in st.session_state: st.session_state.otp = None
 
     if st.button("Send OTP"):
         st.session_state.otp = random.randint(100000, 999999)
-        send_otp_email(email, st.session_state.otp)
+        # Email sending logic...
         st.success("OTP sent!")
 
     user_otp = st.text_input("Enter OTP")
     if st.button("Verify"):
         if user_otp == str(st.session_state.otp):
             st.session_state.logged_in = True
-            st.rerun() # Page refresh hoga
+            st.rerun()
         else:
             st.error("Invalid OTP.")
 
-# Agar login ho gaya, to asli store dikhayein
+# --- PART 2: SHOPPING PAGE (After Login) ---
 else:
-    st.title("Fashion Product Showcase")
-    st.write("Aap successfully login ho chuki hain! Yahan aapki collection hai.")
-    # Yahan apna baaki ka shopping app ka code daal sakti hain
+    st.title("🛍️ My-Secure-Fashion Collection")
+    
+    # Example Product
+    col1, col2 = st.columns(2)
+    with col1:
+        st.subheader("Silk Dress")
+        st.write("Price: Rs. 5000")
+    with col2:
+        st.write("Description: Stylish Pink Silk")
+        # WhatsApp Link (Apna number yahan daalein)
+        st.link_button("Order on WhatsApp", "https://wa.me/923706447456")
+    
+    if st.button("Log out"):
+        st.session_state.logged_in = False
+        st.rerun()
